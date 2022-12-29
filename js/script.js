@@ -1,0 +1,45 @@
+const mario = document.querySelector('.mario');
+const pipe = document.querySelector('.pipe');
+const clouds = document.querySelector('.clouds');
+const botao = document.querySelector('.botao');
+const over = document.querySelector('.over');
+
+const jump = () => {
+  mario.classList.add('jump');
+
+  setTimeout(() => {
+    mario.classList.remove('jump');
+  }, 500);
+}
+
+function myFunction(){
+ location.reload();
+}
+
+const loop = setInterval(() => {
+  
+  const pipePosition = pipe.offsetLeft;
+  const marioPosition = +window.getComputedStyle(mario).bottom.replace('px','');
+
+  if(pipePosition <= 120 && pipePosition > 0 && marioPosition < 79){
+    pipe.style.animation = 'none';
+    pipe.style.left = `${pipePosition}px`;
+
+    mario.style.animation = 'none';
+    mario.style.bottom = `${marioPosition}px`;
+
+    mario.src = "./images/game-over.png";
+    mario.style.width = '11%';
+    mario.style.marginLeft = '37px';
+
+    clouds.style.animation = 'none';
+    clouds.style.left = `${clouds}px`;
+
+    botao.style.display = 'block';
+    over.style.display = 'block';
+
+  }
+  
+}, 10);
+
+document.addEventListener('keydown', jump);
